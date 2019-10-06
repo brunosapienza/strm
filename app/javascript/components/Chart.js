@@ -25,7 +25,7 @@ class Chart extends React.Component {
   render () {
     return (
       <React.Fragment>
-        Chart: {this.props.data}
+        <div class="test">Chart: {this.props.data}</div>
         <ColumnChart stacked={true} data={this.data()} />
       </React.Fragment>
     );
