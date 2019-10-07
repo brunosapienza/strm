@@ -1,4 +1,5 @@
 {
+  "private": true,
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
     "@rails/webpacker": "^4.0.7",
