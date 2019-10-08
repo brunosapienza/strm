@@ -1,24 +1,40 @@
-# README
+# Coding test
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development
 
-Things you may want to cover:
+### Environment
 
-* Ruby version
+* MacOSX
+* Ruby 2.6.5
+* Bundler
 
-* System dependencies
+### Requirements
 
-* Configuration
+* Ruby 2.6.5
+* NodeJS
+* Yarn
 
-* Database creation
+### Installation/ Usage
 
-* Database initialization
+To install Ruby, use [rbenv](https://github.com/sstephenson/rbenv) or similar.
 
-* How to run the test suite
+### JavaScript dependencies
+Install NodeJS
+`$ brew install node`
 
-* Services (job queues, cache servers, search engines, etc.)
+To install Yarn, take a look at the [installation instructions](https://yarnpkg.com/en/docs/install).
 
-* Deployment instructions
+With that in place, to get started do this in the root of the app.
+`$ gem install bundler`
+`$ bundle`
+`$ yarn install`
+`$ rails s`
 
-* ...
+### Running Ruby Tests
+`$ rspec`
+
+### Running JS Tests
+`$ yarn jest`
+
+### UI
+!['model'](/readme/images/ui.png)
