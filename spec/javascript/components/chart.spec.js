@@ -100,4 +100,42 @@ describe('Chart component', () => {
       expect(instance.resultsPath()).toEqual(expected);
     })
   })
+
+  describe('fetching the data', () => {
+    it('renders error message if status is FAILED', () => {
+      const chart = shallow(<Chart />);
+      const instance = chart.instance();
+      instance.setState({ status: 'FAILED' });
+
+      expect(chart.find('span.error')).toHaveLength(1)
+    })
+
+    it('fetches the data when the form is submittted', () => {
+      const chart = shallow(<Chart />);
+      const instance = chart.instance();
+
+      instance.setState(
+        {
+          query: "Scott",
+          before: "2019-08-01",
+          after: "2019-08-31",
+          interval: "1d",
+        }
+      );
+
+      const mockSuccessResponse = {};
+      const mockJsonPromise = Promise.resolve(mockSuccessResponse);
+      const mockFetchPromise = Promise.resolve({
+        json: () => mockJsonPromise,
+      });
+      jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
+
+      chart.find('form').simulate('submit', { preventDefault () {} });
+
+      const expectedPath = '/results?query=Scott&before=1564617600000&after=1567209600000&interval=1d';
+
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(global.fetch).toHaveBeenCalledWith(expectedPath);
+    })
+  })
 })
