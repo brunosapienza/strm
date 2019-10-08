@@ -32,5 +32,14 @@ RSpec.describe DashboardController, type: :controller do
       expect(response.content_type).to eq('application/json; charset=utf-8')
       expect(JSON.parse(response.body)).to eq(result.as_json)
     end
+
+    it 'renders error in JSON format' do
+      expect(Components::ElasticSearch::Lookup).to receive(:new).and_raise('boom')
+
+      get :query, params: params
+      expect(response.status).to eq(500)
+      expect(response.content_type).to eq('application/json; charset=utf-8')
+      expect(JSON.parse(response.body)).to eq({ error: 'boom' }.as_json)
+    end
   end
 end
