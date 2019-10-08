@@ -66,6 +66,7 @@ class Chart extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
+
     this.setState({ status: 'FETCHING' });
 
     const self = this;
@@ -103,7 +104,7 @@ class Chart extends React.Component {
       return(
         <React.Fragment>
           {this.renderForm()}
-          Please review the arguments and try it again.
+          <span className="error">Please review the arguments and try it again.</span>
         </React.Fragment>
       )
     } else if (this.state.status === 'FETCHING') {
