@@ -20,7 +20,7 @@ module Components
           bool: {
             must: [
               { multi_match: { query: params['query'] } },
-              { range: { timestamp: { gte: params['before'], lte: params['after'] } } }
+              { range: { timestamp: { gte: params['after'], lte:  params['before'] } } }
             ]
           }
         }

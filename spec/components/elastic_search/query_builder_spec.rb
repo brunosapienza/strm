@@ -4,11 +4,13 @@ require 'rails_helper'
 
 RSpec.describe Components::ElasticSearch::QueryBuilder do
   describe 'definition' do
+    let(:before) { '1554037199999' }
+    let(:after) { '1551358800000' }
     let(:params) do
       {
         query: 'Scomo',
-        before: '1554037199999',
-        after: '1551358800000',
+        before: before,
+        after: after,
         interval: '1d'
       }.as_json
     end
@@ -19,7 +21,7 @@ RSpec.describe Components::ElasticSearch::QueryBuilder do
           bool: {
             must: [
               { multi_match: { query: 'Scomo' } },
-              { range: { timestamp: { gte: '1554037199999', lte: '1551358800000' } } }
+              { range: { timestamp: { gte: after, lte: before } } }
             ]
           }
         },
