@@ -20,7 +20,7 @@ RSpec.describe Components::ElasticSearch::QueryBuilder do
         query: {
           bool: {
             must: [
-              { multi_match: { query: 'Scomo' } },
+              { multi_match: { query: 'Scomo', fields: [:text] } },
               { range: { timestamp: { gte: after, lte: before } } }
             ]
           }

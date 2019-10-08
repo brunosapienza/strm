@@ -19,7 +19,7 @@ module Components
         {
           bool: {
             must: [
-              { multi_match: { query: params['query'] } },
+              { multi_match: { query: params['query'], fields: [:text] } },
               { range: { timestamp: { gte: params['after'], lte:  params['before'] } } }
             ]
           }
