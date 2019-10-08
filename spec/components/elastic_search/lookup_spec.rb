@@ -14,17 +14,20 @@ RSpec.describe Components::ElasticSearch::Lookup do
     end
 
     let(:query_builder) { Components::ElasticSearch::QueryBuilder }
-
-    let(:client) { double('SingletonClient') }
+    let(:client) { Components::ElasticSearch::Client.instance }
     let(:lookup) { described_class.new(query_params, client) }
+    let(:connection) { double('connection') }
 
     it 'performs an Elastic Search lookup' do
-      expect(client).to receive(:search).with(
+      allow(client).to receive(:connection).and_return(connection)
+      allow(connection).to receive(:search)
+
+      lookup.query
+
+      expect(connection).to have_received(:search).with(
         index: 'news',
         body: query_builder.new(query_params).definition
       )
-
-      lookup.query(query_params)
     end
   end
 end
